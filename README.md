@@ -56,9 +56,75 @@ Fix application code and answer the questions:
 
 >  **What bad coding practices did you find? Why is it a bad practice and how did you fix it?**
 
-Present your findings here...
-``` JS
-console.log('Make use of markdown codesnippets to show and explain good/bad practices!')
+### Avoid Nested `.then()` Chains
+nested `.then()` chains - makes the code hard to read and maintain
+**Bad Practice**:
+```javascript
+fetch(url).then(res => res.json()).then(data => {
+  fetchImageUrl(fileName).then(imageUrl => {
+    // Process the image URL
+  });
+});
+```
+
+**Improved Code**:
+```javascript
+const data = await fetch(url).then(res => res.json());
+const imageUrl = await fetchImageUrl(fileName);
+```
+
+---
+
+### Lack of Error Handling
+without try/catch, the code could fail silently, making debugging difficult
+**Bad Practice**:
+```javascript
+fetch(url).then(res => res.json()).then(data => { /* ... */ });
+```
+
+**Improved Code**:
+```javascript
+try {
+  const data = await fetch(url).then(res => res.json());
+} catch (error) {
+  console.error("Error fetching data:", error);
+}
+```
+
+---
+
+### Hardcoding Values
+Hardcoded URLs and messages throughout the code can lead to inconsistencies, especially if changes are needed across multiple places.
+**Bad Practice**:
+```javascript
+const url = "https://en.wiki..";
+```
+
+**Improved Code**:
+```javascript
+const BASE_URL = "https://en.wiki..";
+```
+
+---
+
+### Avoid Repeated Direct DOM Manipulation 
+Updating the DOM within loops or without batching can cause multiple reflows and lead to poor performance
+**Bad Practice**:
+```javascript
+bears.forEach(bear => {
+  moreBearsSection.innerHTML += `<div>${bear.name}</div>`;
+});
+```
+
+**Improved Code**:
+```javascript
+const fragment = document.createDocumentFragment();
+bears.forEach(bear => {
+  const bearDiv = document.createElement('div');
+  bearDiv.textContent = bear.name;
+  fragment.appendChild(bearDiv);
+});
+moreBearsSection.appendChild(fragment);
 ```
 
 
