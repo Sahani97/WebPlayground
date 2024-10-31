@@ -43,7 +43,7 @@ Submit your coding repository link in Moodle. Send me an invitation to your repo
 The provided base project template contains some bugs and bad JS coding practices for you to fix in your first playground. Take a look into the component files and get a grasp of the inner workings of the provided project.
 > **ATTENTION: After finishing the JS Playground please create a commit or branch and link it below. Otherwise it is not possible to grade your 1. submission, since we will switch to TypeScript afterwards!**
 > 
-> **This is my JS Playground commit/branch:** <LINK_TO_YOUR_COMMIT>
+> **This is my JS Playground commit/branch:** https://github.com/Sahani97/WebPlayground/tree/904302934e551bfa6df15750aa0a56bd1f343edc
 
 **Tasks:**
 Fix application code and answer the questions:
