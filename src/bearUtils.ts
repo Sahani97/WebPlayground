@@ -8,23 +8,22 @@ interface Bear {
 }
 
 // Function to extract bear data from the wikitext
-export const extractBears = (wikitext: string) => {
+export const extractBears = async (wikitext: string) => {
   const speciesTables = wikitext.split('{{Species table/end}}');
   const bears: Bear[] = [];
 
-  speciesTables.forEach((table) => {
+  for (const table of speciesTables) {
     const rows = table.split('{{Species table/row');
-    rows.forEach(async (row) => {
+    for (const row of rows) {
       const nameMatch = row.match(/\|name=\[\[(.*?)\]\]/);
       const binomialMatch = row.match(/\|binomial=(.*?)\n/);
       const imageMatch = row.match(/\|image=(.*?)\n/);
-      const rangeMatch = row.match(/\|range=(.*?)\n/); // Extract range
+      const rangeMatch = row.match(/\|range=(.*?)\n/);
 
       if (nameMatch && binomialMatch && imageMatch && rangeMatch) {
         const fileName = imageMatch[1].trim().replace('File:', '');
-
-        // Fetch image URL and add the bear data to the list
         const imageUrl = await fetchImageUrl(fileName);
+
         const bear: Bear = {
           name: nameMatch[1],
           binomial: binomialMatch[1],
@@ -33,13 +32,11 @@ export const extractBears = (wikitext: string) => {
         };
 
         bears.push(bear);
-
-        if (bears.length === rows.length) {
-          renderBears(bears);
-        }
       }
-    });
-  });
+    }
+  }
+
+  renderBears(bears);
 };
 
 // Function to render bear data in HTML
@@ -47,8 +44,6 @@ const renderBears = (bears: Bear[]) => {
   const moreBearsSection = document.querySelector('.more_bears');
   if (moreBearsSection) {
     moreBearsSection.innerHTML = ''; // Clear the section first
-
-    // Use DocumentFragment to minimize reflows
     const fragment = document.createDocumentFragment();
     bears.forEach((bear) => {
       const bearDiv = document.createElement('div');

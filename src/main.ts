@@ -23,10 +23,10 @@ const params: Params = {
 // Function to fetch and display bear data
 const getBearData = async () => {
   try {
-    const data = await fetchBearData(params);
+    const data = await fetchBearData(params); // Use params or remove it if unnecessary
     const wikitext = data.parse?.wikitext?.['*'];
     if (wikitext) {
-      extractBears(wikitext);
+      await extractBears(wikitext); // add await here
     } else {
       console.error('No wikitext found in response.');
     }
