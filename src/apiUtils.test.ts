@@ -1,10 +1,15 @@
+// src/apiUtils.test.ts
 import { fetchImageUrl } from './apiUtils';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 
 test('fetchImageUrl returns placeholder URL for an invalid image URL', async () => {
-  // Ungültige URL übergeben
-  const imageUrl = await fetchImageUrl('invalid_image.jpg');
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(() => Promise.reject(new Error('Network error')))
+  );
 
-  // Überprüfen, ob die Placeholder-URL zurückgegeben wird
+  const imageUrl = await fetchImageUrl('invalid_image.jpg');
   expect(imageUrl).toBe('https://via.placeholder.com/200');
+
+  vi.restoreAllMocks();
 });
