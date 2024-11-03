@@ -136,12 +136,12 @@ Here are some additional resources: [Package Management and Bundling](https://gi
 **Tasks:**
 * (1) Integrate `npm` and a build management tool into your project.
 * (2) Configure your project to use Typescript as your primary development language and adapt the code and file extensions respectively.
-* (2) Use ESLint and Prettier inside your project - rulesets can be found below.
+* (2) Use ESLint and Prettier inside your project - rulesets can be found below. /nur prettier
 * (1) Keep your builds clear and add dependencies to the right build (e.g. do not add dev dependencies inside the production build and vice versa).
 * (1) Define the following tasks within `npm scripts`:
   * `dev`: starts the development server
   * `build`: runs the typescript compiler and bundles your application - bundling depends on your chosen build tool (e.g. Vite, Webpack) but typically bundles multiple files into one, applies optimizations like minification and obfuscation and outputs final results to a `dist` or `build` directory.
-  * `lint`: runs ESLint on all  `.js` and `.ts` files in your projects `/src` directory
+  * `lint`: eruns ESLint on all  `.js` and `.ts` files in your projects `/src` directory
   * `lint:fix`: runs and also fixes all issues found by ESLint
   * `format`: formats all `.js` and `.ts` files in your projects `/src` directory
   * `format:check`: checks if the files in the `/src` directory are formatted according to Prettier's rules.
@@ -177,6 +177,15 @@ Apply the following ruleset for Prettier:
 ```
 
 >  **What improvements in your codebase were introduced by using TS instead of JS? Name at least 3 and explain why.**
+### Improvements introduced by using TypeScript over JavaScript
+
+1. **Static Type Checking**: TypeScript provides compile-time type checking, allowing errors to be caught before runtime. This reduces runtime errors and improves code stability by ensuring correct data types are used.
+
+2. **Enhanced Autocompletion**: Type annotations improve autocompletion in editors, making development faster and reducing typos. Developers get more accurate suggestions, which is especially helpful in larger codebases.
+
+3. **Better Documentation and Maintainability**: Interfaces and types in TypeScript act as documentation, making the code more understandable. This improves maintainability, as other developers can quickly grasp the structure and purpose of code components.
+
+
 
 Present your findings here...
 
@@ -188,7 +197,7 @@ Here are some additional resources: [GitHub Actions Tutorial](https://github.com
 **Tasks:**
 * (1.5) Write at least 2 meaningful unit tests (use [Vitest](https://vitest.dev/) or [Jest](https://jestjs.io/)) for your project and configure the following tasks in ``npm scripts``:
   * `test`: runs all files that include `.test.` or `.spec.`, e.g.: `example.test.ts`
-  * `test:coverage`: runs tests like `test` but also creates a test coverage report
+  * `test:coverage`: runs tests like `test` but also creates a test coverage report /vl auslassen
 * (1) Configure **2 Workflows** in GitHub Actions, one for development and one for deployment:
   * Create a `development` branch inside your repository
   * (1) Development Workflow should at least test and lint your code when developers push to branch `development`
